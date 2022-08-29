@@ -168,11 +168,11 @@ func app() {
 						ResponseHeaders: client.ArrToHeaders(cCtx.StringSlice("resp-header"), "="),
 					}
 					if cCtx.String("basic-auth") != "" {
-						up := strings.Split(cCtx.String("basic-auth"), ":")
-						if len(up) >= 2 {
+						login, pass, ok := strings.Cut(cCtx.String("basic-auth"), ":")
+						if ok {
 							opt.BasicAuth = &options.BasicAuth{
-								Login: up[0],
-								Pass:  up[1],
+								Login: login,
+								Pass:  pass,
 							}
 						} else {
 							return errors.New("basic auth invalid login:password")
