@@ -1,0 +1,30 @@
+.RequestBody {
+  padding: 10px;
+  background-color: #000;
+  font-size: .8rem;
+  overflow-y: auto;
+  margin: 0;
+}
+
+.RequestBodyTable {
+    width: 100%;
+    background-color: #000;
+    padding: 10px;
+    font-size: .8rem;
+    border-collapse: collapse;
+
+    th, td {
+        width: 50%;
+        text-align: left;
+        height: 26px;
+        padding-left: 10px;
+    }
+
+    tr {
+        border-bottom: 1px solid #202124;
+
+        &:last-child {
+            border-bottom: 1px solid #202124;
+        }
+    }
+}

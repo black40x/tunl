@@ -1,0 +1,12 @@
+.DetailCard {
+  &__Header {
+    font-weight: 700;
+    padding: 15px;
+    font-size: .9rem;
+  }
+
+  &__Body {
+    margin-bottom: 25px;
+    padding: 15px;
+  }
+}

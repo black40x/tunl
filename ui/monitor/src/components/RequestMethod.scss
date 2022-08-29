@@ -1,0 +1,11 @@
+.RequestMethod {
+  font-weight: 700;
+  text-transform: uppercase;
+
+  &--Post {
+    color: #ff9100;
+  }
+  &--Get {
+    color: #5b8800;
+  }
+}
