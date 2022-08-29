@@ -21,10 +21,14 @@ const (
 	YellowBold  = "\033[33;1m"
 )
 
-func PrintConnectionScreen(opt options.Options, publicUrl, clientVer, serverVer string, expireAt int64) {
+func PrintConnectionScreen(opt options.Options, publicUrl, clientVer, serverVer string, serverPrivate bool, expireAt int64) {
 	fmt.Printf("🚀 " + BlueBold + "tunl started!" + Reset + "\n\n")
-	fmt.Printf("Version              %s\n", clientVer)
-	fmt.Printf("Server Version       %s\n", serverVer)
+	fmt.Printf("Cli Version          %s\n", clientVer)
+	if serverPrivate {
+		fmt.Printf("Server Version       %s "+Yellow+"(private)"+Reset+"\n", serverVer)
+	} else {
+		fmt.Printf("Server Version       %s "+Green+"(public)"+Reset+"\n", serverVer)
+	}
 	fmt.Printf("Session expired at   %s\n", time.Now().Add(time.Duration(expireAt)).Format("2006-01-02 15:04:05"))
 	if opt.BasicAuth != nil {
 		fmt.Printf("BasicAuth            %s:%s\n", opt.BasicAuth.Login, opt.BasicAuth.Pass)
@@ -33,7 +37,7 @@ func PrintConnectionScreen(opt options.Options, publicUrl, clientVer, serverVer 
 		fmt.Printf("Web monitor          %s\n", opt.MonitorAddr.ToProtoString())
 	}
 	fmt.Printf("Forwarding           %s -> %s\n\n", opt.LocalAddr.ToProtoString(), publicUrl)
-	fmt.Printf("Docs                 https://github.com/black40x/tunl.online/\n\n")
+	fmt.Printf("Docs                 https://github.com/black40x/tunl-cli/\n\n")
 	fmt.Printf(Yellow + "HTTP Requests: " + Reset + " \n\n")
 }
 

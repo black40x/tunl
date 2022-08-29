@@ -22,6 +22,8 @@ type Client struct {
 	bodySync       sync.Map
 	mu             sync.Mutex
 	version        string
+	serverVersion  string
+	serverPrivate  bool
 }
 
 func NewTunlClient(opt *options.Options, version string) *Client {
@@ -56,21 +58,38 @@ func (c *Client) sendJsonMessage(uuid string, j map[string]interface{}, status i
 
 func (c *Client) handleCommand(cmd *commands.Transfer) {
 	switch cmd.GetCommand().(type) {
+	case *commands.Transfer_ServerHeader:
+		c.serverVersion = cmd.GetServerHeader().Version
+		c.serverPrivate = cmd.GetServerHeader().Private
+
+		if c.serverPrivate && c.opt.ServerPassword == "" {
+			tui.PrintError(errors.New("need password for connect to private server"))
+			os.Exit(1)
+		} else {
+			c.conn.Send(&commands.ClientConnect{
+				Version:  Version,
+				Password: c.opt.ServerPassword,
+			})
+		}
 	case *commands.Transfer_ServerConnect:
 		tui.PrintConnectionScreen(
 			*c.opt,
 			cmd.GetServerConnect().PublicUrl,
 			c.version,
-			cmd.GetServerConnect().Version,
+			c.serverVersion,
+			c.serverPrivate,
 			cmd.GetServerConnect().Expire,
 		)
 	case *commands.Transfer_Error:
 		if cmd.GetError().Code == tunl.ErrorSessionExpired {
-			tui.PrintInfo("session expired")
-			os.Exit(0)
+			tui.PrintInfo(cmd.GetError().GetMessage())
+			os.Exit(1)
 		} else if cmd.GetError().Code == tunl.ErrorServerFull {
-			tui.PrintWarning("client queue is full, please wait some time and try again")
-			os.Exit(0)
+			tui.PrintWarning(cmd.GetError().GetMessage())
+			os.Exit(1)
+		} else if cmd.GetError().Code == tunl.ErrorUnauthorized {
+			tui.PrintError(errors.New(cmd.GetError().GetMessage()))
+			os.Exit(1)
 		} else {
 			tui.PrintError(errors.New(cmd.GetError().GetMessage()))
 		}

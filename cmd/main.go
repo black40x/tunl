@@ -131,8 +131,10 @@ func app() {
 						Value:       "6060",
 					},
 					&cli.StringFlag{
-						Name:  "server-pass",
-						Usage: "set server authenticate password",
+						Name:        "server-pass",
+						Usage:       "use password for private server connect",
+						DefaultText: "false",
+						Value:       "",
 					},
 					&cli.StringFlag{
 						Name:  "basic-auth",
@@ -177,6 +179,9 @@ func app() {
 						} else {
 							return errors.New("basic auth invalid login:password")
 						}
+					}
+					if cCtx.String("server-pass") != "" {
+						opt.ServerPassword = cCtx.String("server-pass")
 					}
 
 					return StartTunlClient(opt)

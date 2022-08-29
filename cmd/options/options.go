@@ -21,4 +21,5 @@ type Options struct {
 	MonitorAddr     *tunl.Address
 	RequestHeaders  Headers
 	ResponseHeaders Headers
+	ServerPassword  string
 }
