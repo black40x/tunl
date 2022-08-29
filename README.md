@@ -1,31 +1,41 @@
-# tunl.online
+# tunl-cli
 
-<b>tunl</b>.online is a developer tool for easy make your service available on the internet and easy way to inspect incoming traffic with view of request Headers and Body.
+[![License](https://img.shields.io/badge/license-AGPL--3.0-orange)](LICENSE)
 
-NOTE: current version in alpha mode.
+The open-source developer platform for share localhost and inspect incoming traffic.
 
-### Download
+Tunl allows you to share local port, IP or URL addres by HTTP protocol, view incomming requests:
 
-From [release page](https://github.com/black40x/tunl-cli/releases)
+- **Easy publsh:** your localhost to internet.
+- **Traffic monitor:** easy tool for inspect incomming traffic with view of request form data, json.
+- **Basic Auth:** protect your tunnel with user name and password.
+- **Add headers:** to your requests and responses.
 
-### Build
+**NOTE:** current version in alpha mode.
+
+[Releases](https://github.com/black40x/tunl-cli/releases)
+
+## Build
+
+Install npm and go 1.19
 
 ```
+go get
 go run build.go
 ```
 
-### Examples
+## Example
 
 Share local port:
 
 ```
-tunl http 8000
+tunl http -tunl-server <your-server> 8000
 ```
 
 Share IP address:
 
 ```
-tunl http 192.168.1.10:8000
+tunl http -tunl-server <your-server> 192.168.1.10:8000
 ```
 
 Example output:
@@ -33,10 +43,13 @@ Example output:
 ```
 🚀 tunl started!
 
-Version              0.1.0-Alpha
-Session expired at   2022-08-19 17:09:53
+Cli Version          0.1.29
+Server Version       0.1.29 (public)
+Session expired at   2022-08-30 00:03:48
 Web monitor          http://127.0.0.1:6060
-Forwarding           http://127.0.0.1:8000 -> http://10-10-10-10-abcde.tunl.online
+Forwarding           http://127.0.0.1:8000 -> http://127-0-0-1-u8g75l.tunl.online
+
+Docs                 https://github.com/black40x/tunl-cli/
 
 HTTP Requests:  
 
@@ -45,3 +58,12 @@ HTTP Requests:
 ```
 
 ![](assets/web-mon.png)
+
+## Warning
+
+Monitor port flag not used.
+
+## License
+
+Tunl.online is distributed under [AGPL-3.0-only](LICENSE).
+
