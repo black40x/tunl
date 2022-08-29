@@ -20,15 +20,17 @@ import (
 const threads = 5
 
 type TunlMonitor struct {
-	ws      websocket.Upgrader
-	httpSrv *http.Server
-	conn    []*websocket.Conn
-	mu      sync.Mutex
+	ws        websocket.Upgrader
+	httpSrv   *http.Server
+	conn      map[int]*websocket.Conn
+	connCount int
+	mu        sync.Mutex
 }
 
 func NewTunlMonitor() *TunlMonitor {
 	return &TunlMonitor{
-		ws: websocket.Upgrader{},
+		ws:   websocket.Upgrader{},
+		conn: make(map[int]*websocket.Conn),
 	}
 }
 
@@ -40,16 +42,23 @@ func (m *TunlMonitor) connect(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
+
+	m.mu.Lock()
+	m.connCount++
+	m.mu.Unlock()
+
+	idx := m.connCount + 1
+
 	defer func(conn *websocket.Conn) {
 		conn.Close()
+		delete(m.conn, idx)
 	}(conn)
 
-	idx := len(m.conn)
 	defer func(m *TunlMonitor) {
-		m.conn = append(m.conn[:idx], m.conn[idx+1:]...)
+		delete(m.conn, idx)
 	}(m)
 
-	m.conn = append(m.conn, conn)
+	m.conn[idx] = conn
 
 	for {
 		_, message, err := conn.ReadMessage()
