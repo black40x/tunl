@@ -6,7 +6,7 @@ The open-source developer platform for share localhost and inspect incoming traf
 
 ![](assets/tunl_example.png)
 
-Tunl allows you to share local port, IP or URL address by HTTP protocol, view incoming requests:
+Tunl allows you to share local port, IP or URL address to the internet, view incoming requests:
 
 - **Easy publish:** your localhost to internet.
 - **Traffic monitor:** easy tool for inspect incoming traffic with view of request form data, json.
