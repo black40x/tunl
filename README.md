@@ -4,64 +4,46 @@
 
 The open-source developer platform for share localhost and inspect incoming traffic.
 
-Tunl allows you to share local port, IP or URL addres by HTTP protocol, view incomming requests:
+![](assets/tunl_example.png)
 
-- **Easy publsh:** your localhost to internet.
-- **Traffic monitor:** easy tool for inspect incomming traffic with view of request form data, json.
-- **Basic Auth:** protect your tunnel with user name and password.
+Tunl allows you to share local port, IP or URL address by HTTP protocol, view incoming requests:
+
+- **Easy publish:** your localhost to internet.
+- **Traffic monitor:** easy tool for inspect incoming traffic with view of request form data, json.
+- **Basic Auth:** protect your tunnel with username and password.
 - **Add headers:** to your requests and responses.
 
-**NOTE:** current version in alpha mode.
+**NOTE:** current version in alpha mode. Monitor port flag not supported yet. Tunl.online server currently private.
 
-[Releases](https://github.com/black40x/tunl-cli/releases)
+[Download](https://github.com/black40x/tunl-cli/releases)
+
+![](assets/help.png)
+
+![](assets/help_http.png)
+
+## Example commands
+
+```
+tunl http -tunl-server <your-server> 8000
+```
+```
+tunl http -tunl-server <your-server> 192.168.1.10:8000
+```
+```
+tunl http -tunl-server <your-server> dir://<path-to-directory>
+```
+```
+tunl http -tunl-server <your-server> -basic-auth login:pass 8000
+```
 
 ## Build
 
 Install npm and go 1.19
 
 ```
-go get
+go mod tidy
 go run build.go
 ```
-
-## Example
-
-Share local port:
-
-```
-tunl http -tunl-server <your-server> 8000
-```
-
-Share IP address:
-
-```
-tunl http -tunl-server <your-server> 192.168.1.10:8000
-```
-
-Example output:
-
-```
-🚀 tunl started!
-
-Cli Version          0.1.29
-Server Version       0.1.29 (public)
-Session expired at   2022-08-30 00:03:48
-Web monitor          http://127.0.0.1:6060
-Forwarding           http://127.0.0.1:8000 -> http://127-0-0-1-u8g75l.tunl.online
-
-Docs                 https://github.com/black40x/tunl-cli/
-
-HTTP Requests:  
-
-[5.9ms] [GET] /
-...
-```
-
-![](assets/web-mon.png)
-
-## Warning
-
-Monitor port flag not used.
 
 ## License
 
