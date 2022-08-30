@@ -1,4 +1,6 @@
-# tunl-cli
+<img width="300" src="assets/tunl-logo.svg">
+
+## tunl-cli
 
 [![License](https://img.shields.io/badge/license-AGPL--3.0-orange)](LICENSE)
 
