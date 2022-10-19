@@ -103,8 +103,8 @@ func app() {
 					&cli.StringFlag{
 						Name:        "tunl-host",
 						Usage:       "set tunl connection host",
-						DefaultText: "tunl.online",
-						Value:       "tunl.online",
+						DefaultText: "srv.tunl.online",
+						Value:       "srv.tunl.online",
 					},
 					&cli.StringFlag{
 						Name:        "tunl-port",
