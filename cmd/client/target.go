@@ -15,6 +15,8 @@ import (
 	"tunl-cli/cmd/tui"
 )
 
+const ErrClientResponse = 2000
+
 func (c *Client) httpRequest(r *commands.HttpRequest) (res *http.Response, err error) {
 	ts := time.Now()
 	client := &http.Client{}
@@ -80,14 +82,11 @@ func (c *Client) httpRequest(r *commands.HttpRequest) (res *http.Response, err e
 func (c *Client) processWeb(r *commands.HttpRequest) {
 	res, err := c.httpRequest(r)
 	if err != nil {
-		c.sendJsonMessage(
-			r.Uuid,
-			map[string]interface{}{
-				"error":   true,
-				"message": "Client response error",
-			},
-			http.StatusBadRequest,
-		)
+		c.conn.Send(&commands.HttpResponse{
+			Uuid:          r.Uuid,
+			ContentLength: 0,
+			Status:        ErrClientResponse,
+		})
 	} else {
 		mes := commands.HttpResponse{
 			Uuid:          r.Uuid,
@@ -106,14 +105,11 @@ func (c *Client) processWeb(r *commands.HttpRequest) {
 
 		_, err := c.conn.Send(&mes)
 		if err != nil {
-			c.sendJsonMessage(
-				r.Uuid,
-				map[string]interface{}{
-					"error":   true,
-					"message": "Client response error",
-				},
-				http.StatusBadRequest,
-			)
+			c.conn.Send(&commands.HttpResponse{
+				Uuid:          r.Uuid,
+				ContentLength: 0,
+				Status:        ErrClientResponse,
+			})
 		} else {
 			re := bufio.NewReader(res.Body)
 			buf := make([]byte, 0, tunl.ReaderSize)
