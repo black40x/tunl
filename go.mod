@@ -3,7 +3,7 @@ module tunl-cli
 go 1.19
 
 require (
-	github.com/black40x/tunl-core v0.1.17
+	github.com/black40x/tunl-core v0.1.32
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/websocket v1.5.0
 	github.com/urfave/cli/v2 v2.11.2

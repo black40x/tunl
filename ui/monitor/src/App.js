@@ -32,6 +32,10 @@ function App() {
         }
         let localHost = body.dataset.host
 
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+            localHost = "localhost"
+        }
+
         let ws = new WebSocket(`ws://${localHost}:${localPort}/connect`)
         ws.onopen = function(evt) {
             setConnectStatus(true);

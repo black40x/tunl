@@ -41,7 +41,26 @@ func StartTunlClient(opt *options.Options) error {
 			"body":           false,
 		}
 
-		if r.IsJson() {
+		if r.IsFormUrlencoded() {
+			values := map[string][]string{}
+			arr := strings.Split(string(b), "&")
+			for _, val := range arr {
+				kv := strings.Split(val, "=")
+				if len(kv) >= 2 {
+					values[kv[0]] = []string{kv[1]}
+				}
+			}
+			mes["body"] = map[string]interface{}{
+				"values": values,
+			}
+			mes["body_type"] = "url-encoded"
+		} else if r.IsTextPlain() {
+			mes["body_type"] = "text"
+			mes["body"] = string(b)
+		} else if r.IsXML() {
+			mes["body_type"] = "xml"
+			mes["body"] = string(b)
+		} else if r.IsJson() {
 			mes["body_type"] = "json"
 			mes["body"] = string(b)
 		} else if _, ok := r.IsFormData(); ok {

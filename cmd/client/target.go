@@ -15,8 +15,6 @@ import (
 	"tunl-cli/cmd/tui"
 )
 
-const ErrClientResponse = 2000
-
 func (c *Client) httpRequest(r *commands.HttpRequest) (res *http.Response, err error) {
 	ts := time.Now()
 	client := &http.Client{}
@@ -85,7 +83,7 @@ func (c *Client) processWeb(r *commands.HttpRequest) {
 		c.conn.Send(&commands.HttpResponse{
 			Uuid:          r.Uuid,
 			ContentLength: 0,
-			Status:        ErrClientResponse,
+			ErrorCode:     int64(tunl.ErrorClientResponse),
 		})
 	} else {
 		mes := commands.HttpResponse{
@@ -93,6 +91,7 @@ func (c *Client) processWeb(r *commands.HttpRequest) {
 			ContentLength: res.ContentLength,
 			Proto:         res.Proto,
 			Status:        int32(res.StatusCode),
+			ErrorCode:     -1,
 		}
 
 		for k, v := range res.Header {
@@ -108,7 +107,7 @@ func (c *Client) processWeb(r *commands.HttpRequest) {
 			c.conn.Send(&commands.HttpResponse{
 				Uuid:          r.Uuid,
 				ContentLength: 0,
-				Status:        ErrClientResponse,
+				ErrorCode:     int64(tunl.ErrorClientResponse),
 			})
 		} else {
 			re := bufio.NewReader(res.Body)
@@ -199,6 +198,7 @@ func (c *Client) processDir(r *commands.HttpRequest) {
 		ContentLength: st.Size(),
 		Proto:         "HTTP/1.1",
 		Status:        int32(http.StatusOK),
+		ErrorCode:     -1,
 	}
 
 	mes.Header = []*commands.Header{
@@ -257,6 +257,7 @@ func (c *Client) processRequestCommand(r *commands.HttpRequest) {
 				},
 				ContentLength: 0,
 				Status:        http.StatusUnauthorized,
+				ErrorCode:     -1,
 			})
 			return
 		}

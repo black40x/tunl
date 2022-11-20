@@ -9,11 +9,11 @@ function RequestBody(props) {
         return (
             <Typography level="body2" component="pre">Body empty</Typography>
         )
-    } else if (bodyType === 'json') {
+    } else if (bodyType === 'json' || bodyType === 'xml' || bodyType === 'text') {
         return (
             <Typography level="body2" component="pre">{ body }</Typography>
         )
-    } else if (bodyType === 'form-data') {
+    } else if (bodyType === 'form-data' || bodyType === 'url-encoded') {
         return (
             <Box sx={{
                 mb: .3,
@@ -31,7 +31,7 @@ function RequestBody(props) {
                         </React.Fragment>
                     )
                 })}
-                {body.values && Object.keys(body.files).map((k, v) => {
+                {body.files && Object.keys(body.files).map((k, v) => {
                     return (
                         <React.Fragment key={k}>
                             <Typography level="body2">{k}</Typography>
