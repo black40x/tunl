@@ -66,7 +66,11 @@ func StartTunlClient(opt *options.Options) error {
 	})
 
 	if opt.Monitor {
-		err = tunlMonitor.Start(opt.MonitorAddr.ToString())
+		err = tunlMonitor.Start(
+			opt.MonitorAddr.ToString(),
+			opt.MonitorHost,
+			opt.MonitorPort,
+		)
 		if err != nil {
 			return errors.New(fmt.Sprintf("can't start tunl monitor at %s", opt.MonitorAddr.ToString()))
 		}
@@ -166,6 +170,8 @@ func app() {
 						HttpTimeout:     time.Second * 15,
 						Monitor:         cCtx.Bool("monitor"),
 						MonitorAddr:     monitorAddr,
+						MonitorHost:     cCtx.String("monitor-host"),
+						MonitorPort:     cCtx.String("monitor-port"),
 						RequestHeaders:  client.ArrToHeaders(cCtx.StringSlice("req-header"), "="),
 						ResponseHeaders: client.ArrToHeaders(cCtx.StringSlice("resp-header"), "="),
 					}

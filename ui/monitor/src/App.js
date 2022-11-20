@@ -30,8 +30,9 @@ function App() {
         if (isNaN(localPort)) {
             localPort = defaultPort
         }
+        let localHost = body.dataset.host
 
-        let ws = new WebSocket(`ws://localhost:${localPort}/connect`)
+        let ws = new WebSocket(`ws://${localHost}:${localPort}/connect`)
         ws.onopen = function(evt) {
             setConnectStatus(true);
 
@@ -65,7 +66,7 @@ function App() {
 
     return (
         <CssVarsProvider theme={monitorTheme}
-                         defaultMode="light"
+                         defaultMode="system"
                          modeStorageKey="identify-system-mode">
             <Layout.Root>
                 <Layout.Header>

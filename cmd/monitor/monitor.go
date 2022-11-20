@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	"golang.org/x/net/netutil"
+	"html/template"
 	"io/fs"
 	"log"
 	"net"
@@ -24,7 +25,14 @@ type TunlMonitor struct {
 	httpSrv   *http.Server
 	conn      map[int]*websocket.Conn
 	connCount int
+	template  *template.Template
 	mu        sync.Mutex
+	appConf   appConfig
+}
+
+type appConfig struct {
+	Port string
+	Host string
 }
 
 func NewTunlMonitor() *TunlMonitor {
@@ -32,6 +40,15 @@ func NewTunlMonitor() *TunlMonitor {
 		ws:   websocket.Upgrader{},
 		conn: make(map[int]*websocket.Conn),
 	}
+}
+
+func (m *TunlMonitor) loadTemplate() {
+	index, _ := fs.Sub(ui.MonitorUI, "monitor/build")
+	m.template, _ = template.ParseFS(index, "index.html")
+}
+
+func (m *TunlMonitor) index(w http.ResponseWriter, r *http.Request) {
+	m.template.Execute(w, m.appConf)
 }
 
 func (m *TunlMonitor) connect(w http.ResponseWriter, r *http.Request) {
@@ -100,7 +117,7 @@ func (m *TunlMonitor) Shutdown(ctx context.Context) {
 	}
 }
 
-func (m *TunlMonitor) Start(addr string) error {
+func (m *TunlMonitor) Start(addr, host, port string) error {
 	monitorUI, err := fs.Sub(ui.MonitorUI, "monitor/build")
 	if err != nil {
 		return err
@@ -111,9 +128,16 @@ func (m *TunlMonitor) Start(addr string) error {
 		return err
 	}
 
+	m.loadTemplate()
+	m.appConf = appConfig{
+		Host: host,
+		Port: port,
+	}
+
 	listener = netutil.LimitListener(listener, threads)
 
 	r := mux.NewRouter()
+	r.HandleFunc("/", m.index)
 	r.HandleFunc("/connect", m.connect)
 	r.PathPrefix("/").Handler(http.FileServer(http.FS(monitorUI)))
 
