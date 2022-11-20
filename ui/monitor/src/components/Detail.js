@@ -43,7 +43,7 @@ export default function RequestContent(props) {
                     color={getMethodColor(request?.method)}
                 >{request?.method}</Chip>
 
-                <Typography level="h5" textColor="text.primary">
+                <Typography level="h5" sx={{fontWeight: 300}} textColor="text.primary">
                     { request?.uri }
                 </Typography>
             </Box>
