@@ -27,7 +27,6 @@ export default function RequestContent(props) {
         <Sheet
             variant="outlined"
             sx={{
-                minHeight: 500,
                 borderRadius: 'sm',
                 p: 2,
                 mb: 3,

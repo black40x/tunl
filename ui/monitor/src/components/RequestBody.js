@@ -9,9 +9,43 @@ function RequestBody(props) {
         return (
             <Typography level="body2" component="pre">Body empty</Typography>
         )
-    } else if (bodyType === 'json' || bodyType === 'xml' || bodyType === 'text') {
+    } else if (bodyType === 'json') {
         return (
-            <Typography level="body2" component="pre">{ body }</Typography>
+            <Typography
+                sx={{
+                    borderRadius: 'sm',
+                    p: 2,
+                    display: 'block',
+                    background: 'var(--joy-palette-neutral-800, #001E3C)',
+                    borderColor: 'var(--joy-palette-neutral-700, #132F4C)',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    fontFamily: 'Menlo,Consolas,"Droid Sans Mono",monospace',
+                    fontSize: '0.8125rem'
+                }}
+                level="body2"
+                component="pre">
+                { JSON.stringify(JSON.parse(body), null, 2) }
+            </Typography>
+        )
+    }  else if (bodyType === 'xml' || bodyType === 'text') {
+        return (
+            <Typography
+                sx={{
+                    borderRadius: 'sm',
+                    p: 2,
+                    display: 'block',
+                    background: 'var(--joy-palette-neutral-800, #001E3C)',
+                    borderColor: 'var(--joy-palette-neutral-700, #132F4C)',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    fontFamily: 'Menlo,Consolas,"Droid Sans Mono",monospace',
+                    fontSize: '0.8125rem'
+                }}
+                level="body2"
+                component="pre">
+                { body }
+            </Typography>
         )
     } else if (bodyType === 'form-data' || bodyType === 'url-encoded') {
         return (
@@ -19,7 +53,15 @@ function RequestBody(props) {
                 mb: .3,
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
-                gap: 1
+                gap: 1,
+                borderRadius: 'sm',
+                p: 2,
+                background: 'var(--joy-palette-neutral-800, #001E3C)',
+                borderColor: 'var(--joy-palette-neutral-700, #132F4C)',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                fontFamily: 'Menlo,Consolas,"Droid Sans Mono",monospace',
+                fontSize: '0.8125rem'
             }}>
                 <Typography level="body3">KEY</Typography>
                 <Typography level="body3">VALUE</Typography>
