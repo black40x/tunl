@@ -1,37 +1,45 @@
-import './RequestBody.scss'
+import * as React from 'react';
+import Box from '@mui/joy/Box';
+import Typography from '@mui/joy/Typography';
 
 function RequestBody(props) {
     const {body, bodyType} = props
 
-    console.log(body)
-    console.log(bodyType)
-
     if (!bodyType || !body) {
         return (
-            <pre className={'RequestBody'}>Body empty</pre>
+            <Typography level="body2" component="pre">Body empty</Typography>
         )
     } else if (bodyType === 'json') {
         return (
-            <pre className={'RequestBody'}>{body}</pre>
+            <Typography level="body2" component="pre">{ body }</Typography>
         )
     } else if (bodyType === 'form-data') {
         return (
-            <table className={'RequestBodyTable'}>
-                <thead>
-                <tr>
-                    <th>Key</th>
-                    <th>Value</th>
-                </tr>
-                </thead>
-                <tbody>
+            <Box sx={{
+                mb: .3,
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: 1
+            }}>
+                <Typography level="body3">KEY</Typography>
+                <Typography level="body3">VALUE</Typography>
                 {body.values && Object.keys(body.values).map((k, v) => {
-                    return (<tr key={k}><td>{k}</td><td>{body.values[k]}</td></tr>)
+                    return (
+                        <React.Fragment key={k}>
+                            <Typography level="body2">{k}</Typography>
+                            <Typography level="body2">{ body.values[k] }</Typography>
+                        </React.Fragment>
+                    )
                 })}
-                {body.files && Object.keys(body.files).map((k, v) => {
-                    return (<tr key={k}><td>{k}</td><td>{body.files[k]}</td></tr>)
+                {body.values && Object.keys(body.files).map((k, v) => {
+                    return (
+                        <React.Fragment key={k}>
+                            <Typography level="body2">{k}</Typography>
+                            <Typography level="body2">{ body.files[k] }</Typography>
+                        </React.Fragment>
+                    )
                 })}
-                </tbody>
-            </table>
+            </Box>
         )
     }
 }
