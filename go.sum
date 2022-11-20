@@ -1,5 +1,5 @@
-github.com/black40x/tunl-core v0.1.17 h1:MRQJO3d9mhJfrs4jOteJZZXI7JRlukFL/nAS4mZvGvI=
-github.com/black40x/tunl-core v0.1.17/go.mod h1:2HxsrOaacHv8xxRwehk/JDBS1h2B1+1gPFS6vytr7TA=
+github.com/black40x/tunl-core v0.1.32 h1:0JIxWUuQjoICBw3EUnsfb3JvO+NhG3vIHlNsb+/V8LM=
+github.com/black40x/tunl-core v0.1.32/go.mod h1:2HxsrOaacHv8xxRwehk/JDBS1h2B1+1gPFS6vytr7TA=
 github.com/cpuguy83/go-md2man/v2 v2.0.2 h1:p1EgwI/C7NhT0JmVkwCD2ZBK8j4aeHQX2pMHHBfMQ6w=
 github.com/cpuguy83/go-md2man/v2 v2.0.2/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=

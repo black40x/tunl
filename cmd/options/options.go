@@ -19,6 +19,8 @@ type Options struct {
 	BasicAuth       *BasicAuth
 	Monitor         bool
 	MonitorAddr     *tunl.Address
+	MonitorPort     string
+	MonitorHost     string
 	RequestHeaders  Headers
 	ResponseHeaders Headers
 	ServerPassword  string

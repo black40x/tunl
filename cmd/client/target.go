@@ -80,20 +80,18 @@ func (c *Client) httpRequest(r *commands.HttpRequest) (res *http.Response, err e
 func (c *Client) processWeb(r *commands.HttpRequest) {
 	res, err := c.httpRequest(r)
 	if err != nil {
-		c.sendJsonMessage(
-			r.Uuid,
-			map[string]interface{}{
-				"error":   true,
-				"message": "Client response error",
-			},
-			http.StatusBadRequest,
-		)
+		c.conn.Send(&commands.HttpResponse{
+			Uuid:          r.Uuid,
+			ContentLength: 0,
+			ErrorCode:     int64(tunl.ErrorClientResponse),
+		})
 	} else {
 		mes := commands.HttpResponse{
 			Uuid:          r.Uuid,
 			ContentLength: res.ContentLength,
 			Proto:         res.Proto,
 			Status:        int32(res.StatusCode),
+			ErrorCode:     -1,
 		}
 
 		for k, v := range res.Header {
@@ -106,14 +104,11 @@ func (c *Client) processWeb(r *commands.HttpRequest) {
 
 		_, err := c.conn.Send(&mes)
 		if err != nil {
-			c.sendJsonMessage(
-				r.Uuid,
-				map[string]interface{}{
-					"error":   true,
-					"message": "Client response error",
-				},
-				http.StatusBadRequest,
-			)
+			c.conn.Send(&commands.HttpResponse{
+				Uuid:          r.Uuid,
+				ContentLength: 0,
+				ErrorCode:     int64(tunl.ErrorClientResponse),
+			})
 		} else {
 			re := bufio.NewReader(res.Body)
 			buf := make([]byte, 0, tunl.ReaderSize)
@@ -203,6 +198,7 @@ func (c *Client) processDir(r *commands.HttpRequest) {
 		ContentLength: st.Size(),
 		Proto:         "HTTP/1.1",
 		Status:        int32(http.StatusOK),
+		ErrorCode:     -1,
 	}
 
 	mes.Header = []*commands.Header{
@@ -261,6 +257,7 @@ func (c *Client) processRequestCommand(r *commands.HttpRequest) {
 				},
 				ContentLength: 0,
 				Status:        http.StatusUnauthorized,
+				ErrorCode:     -1,
 			})
 			return
 		}
