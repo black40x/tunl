@@ -38,7 +38,6 @@ func (c *Client) SetHttpRequestReceiver(receiver HttpRequestReceiver) {
 	c.receiveRequest = receiver
 }
 
-// ToDo - move to Connection messages
 func (c *Client) sendJsonMessage(uuid string, j map[string]interface{}, status int32) {
 	data, err := json.Marshal(j)
 	if err == nil {
