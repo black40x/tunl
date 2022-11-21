@@ -44,12 +44,7 @@ Install npm and go 1.19
 git clone git@github.com:black40x/tunl.git
 cd tunl
 make
-```
-
-or 
-
-```
-go install github.com/black40x/tunl@latest
+go install 
 ```
 
 ## License
