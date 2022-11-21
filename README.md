@@ -49,7 +49,7 @@ make
 or 
 
 ```
-go install github.com:black40x/tunl@latest
+go install github.com/black40x/tunl@latest
 ```
 
 ## License
