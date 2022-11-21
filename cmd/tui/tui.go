@@ -2,7 +2,7 @@ package tui
 
 import (
 	"fmt"
-	"github.com/black40x/tunl-cli/cmd/options"
+	"github.com/black40x/tunl/cmd/options"
 	"time"
 )
 
@@ -37,7 +37,7 @@ func PrintConnectionScreen(opt options.Options, publicUrl, clientVer, serverVer 
 		fmt.Printf("Web monitor          %s\n", opt.MonitorAddr.ToProtoString())
 	}
 	fmt.Printf("Forwarding           %s -> %s\n\n", opt.LocalAddr.ToProtoString(), publicUrl)
-	fmt.Printf("Docs                 https://github.com/black40x/tunl-cli/\n\n")
+	fmt.Printf("Docs                 https://github.com/black40x/tunl/\n\n")
 	fmt.Printf(Yellow + "HTTP Requests: " + Reset + " \n\n")
 }
 

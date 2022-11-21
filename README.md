@@ -17,7 +17,7 @@ Tunl allows you to share local port, IP or URL address to the internet, view inc
 - **Basic Auth:** protect your tunnel with username and password.
 - **Add headers:** to your requests and responses.
 
-[Download](https://github.com/black40x/tunl-cli/releases) the latest release. Also, you can start your own server with [tunl-server](https://github.com/black40x/tunl-server).
+[Download](https://github.com/black40x/tunl/releases) the latest release. Also, you can start your own server with [tunl-server](https://github.com/black40x/tunl-server).
 
 ![](assets/monitor.png)
 
@@ -41,10 +41,15 @@ tunl http -basic-auth login:pass 8000
 Install npm and go 1.19
 
 ```
-git clone git@github.com:black40x/tunl-cli.git
-cd tunl-cli
-go get
-go run build.go
+git clone git@github.com:black40x/tunl.git
+cd tunl
+make
+```
+
+or 
+
+```
+go install github.com:black40x/tunl@latest
 ```
 
 ## License

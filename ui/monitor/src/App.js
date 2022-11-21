@@ -140,7 +140,7 @@ function App() {
                         <Link
                             variant="outlined"
                             aria-labelledby="heading-demo"
-                            href="https://github.com/black40x/tunl-cli"
+                            href="https://github.com/black40x/tunl"
                             target="_blank"
                             fontSize="md"
                             borderRadius="sm"

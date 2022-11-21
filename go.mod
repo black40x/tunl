@@ -1,4 +1,4 @@
-module github.com/black40x/tunl-cli
+module github.com/black40x/tunl
 
 go 1.19
 

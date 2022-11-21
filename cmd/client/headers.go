@@ -1,7 +1,7 @@
 package client
 
 import (
-	"github.com/black40x/tunl-cli/cmd/options"
+	"github.com/black40x/tunl/cmd/options"
 	"strings"
 )
 
