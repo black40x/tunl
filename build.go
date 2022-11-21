@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/black40x/tunl-cli/cmd/tui"
 	"log"
 	"os"
 	"os/exec"
 	"strings"
-	"tunl-cli/cmd/tui"
 )
 
 type Env = []string

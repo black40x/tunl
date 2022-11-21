@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"errors"
+	"github.com/black40x/tunl-cli/cmd/tui"
 	"github.com/black40x/tunl-core/commands"
 	"github.com/black40x/tunl-core/tunl"
 	"net/http"
@@ -12,7 +13,6 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-	"tunl-cli/cmd/tui"
 )
 
 func (c *Client) httpRequest(r *commands.HttpRequest) (res *http.Response, err error) {

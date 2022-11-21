@@ -3,6 +3,8 @@ package monitor
 import (
 	"context"
 	"encoding/json"
+	"github.com/black40x/tunl-cli/cmd/tui"
+	"github.com/black40x/tunl-cli/ui"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	"golang.org/x/net/netutil"
@@ -14,8 +16,6 @@ import (
 	"os"
 	"sync"
 	"time"
-	"tunl-cli/cmd/tui"
-	"tunl-cli/ui"
 )
 
 const threads = 5

@@ -3,14 +3,14 @@ package client
 import (
 	"encoding/json"
 	"errors"
+	"github.com/black40x/tunl-cli/cmd/options"
+	"github.com/black40x/tunl-cli/cmd/tui"
 	"github.com/black40x/tunl-core/commands"
 	"github.com/black40x/tunl-core/tunl"
 	"net"
 	"os"
 	"sync"
 	"time"
-	"tunl-cli/cmd/options"
-	"tunl-cli/cmd/tui"
 )
 
 type HttpRequestReceiver func(r *commands.HttpRequest, body []byte, d time.Duration)
