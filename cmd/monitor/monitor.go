@@ -3,8 +3,8 @@ package monitor
 import (
 	"context"
 	"encoding/json"
-	"github.com/black40x/tunl-cli/cmd/tui"
-	"github.com/black40x/tunl-cli/ui"
+	"github.com/black40x/tunl/cmd/tui"
+	"github.com/black40x/tunl/ui"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	"golang.org/x/net/netutil"

@@ -3,10 +3,10 @@ package client
 import (
 	"encoding/json"
 	"errors"
-	"github.com/black40x/tunl-cli/cmd/options"
-	"github.com/black40x/tunl-cli/cmd/tui"
 	"github.com/black40x/tunl-core/commands"
 	"github.com/black40x/tunl-core/tunl"
+	"github.com/black40x/tunl/cmd/options"
+	"github.com/black40x/tunl/cmd/tui"
 	"net"
 	"os"
 	"sync"
