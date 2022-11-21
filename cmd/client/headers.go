@@ -1,8 +1,8 @@
 package client
 
 import (
+	"github.com/black40x/tunl-cli/cmd/options"
 	"strings"
-	"tunl-cli/cmd/options"
 )
 
 func ArrToHeaders(a []string, sep string) options.Headers {

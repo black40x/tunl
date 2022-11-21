@@ -2,8 +2,8 @@ package tui
 
 import (
 	"fmt"
+	"github.com/black40x/tunl-cli/cmd/options"
 	"time"
-	"tunl-cli/cmd/options"
 )
 
 const (

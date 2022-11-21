@@ -5,6 +5,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/black40x/tunl-cli/cmd/client"
+	"github.com/black40x/tunl-cli/cmd/monitor"
+	"github.com/black40x/tunl-cli/cmd/options"
+	"github.com/black40x/tunl-cli/cmd/tui"
 	"github.com/black40x/tunl-core/commands"
 	"github.com/black40x/tunl-core/tunl"
 	"github.com/urfave/cli/v2"
@@ -12,10 +16,6 @@ import (
 	"os/signal"
 	"strings"
 	"time"
-	"tunl-cli/cmd/client"
-	"tunl-cli/cmd/monitor"
-	"tunl-cli/cmd/options"
-	"tunl-cli/cmd/tui"
 )
 
 func StartTunlClient(opt *options.Options) error {
