@@ -1,41 +1,39 @@
 <img width="300" src="assets/tunl-logo.svg">
 
-## tunl-cli
+# tunl-cli
 
 [![License](https://img.shields.io/badge/license-AGPL--3.0-orange)](LICENSE)
 
-The open-source developer platform for share localhost and inspect incoming traffic.
+Tunl - the open-source developer platform for:
 
-![](assets/tunl_example.png)
+- Inspect incoming traffic
+- Debug callback's and WebHook's
+- Show localhost without deploy
 
 Tunl allows you to share local port, IP or URL address to the internet, view incoming requests:
 
 - **Easy publish:** your localhost to internet.
-- **Traffic monitor:** easy tool for inspect incoming traffic with view of request form data, json.
+- **Traffic monitor:** easy tool for inspect incoming traffic with view of request form data and json.
 - **Basic Auth:** protect your tunnel with username and password.
 - **Add headers:** to your requests and responses.
 
-**NOTE:** current version in alpha mode. Monitor port flag not supported yet. Tunl.online server currently private.
+[Download](https://github.com/black40x/tunl-cli/releases) the latest release. Also, you can start your own server with [tunl-server](https://github.com/black40x/tunl-server).
 
-[Download](https://github.com/black40x/tunl-cli/releases)
-
-![](assets/help.png)
-
-![](assets/help_http.png)
+![](assets/monitor.png)
 
 ## Example commands
 
 ```
-tunl http -tunl-server <your-server> 8000
+tunl http 8000
 ```
 ```
-tunl http -tunl-server <your-server> 192.168.1.10:8000
+tunl http 192.168.1.10:8000
 ```
 ```
-tunl http -tunl-server <your-server> dir://<path-to-directory>
+tunl http dir://<path-to-directory>
 ```
 ```
-tunl http -tunl-server <your-server> -basic-auth login:pass 8000
+tunl http -basic-auth login:pass 8000
 ```
 
 ## Build
@@ -43,7 +41,9 @@ tunl http -tunl-server <your-server> -basic-auth login:pass 8000
 Install npm and go 1.19
 
 ```
-go mod tidy
+git clone git@github.com:black40x/tunl-cli.git
+cd tunl-cli
+go get
 go run build.go
 ```
 
